@@ -35,6 +35,8 @@
   },
   "keywords": [],
   "dependencies": {
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "brfs": "0.0.8",
+    "include-folder": "~0.3.0"
   }
 }
