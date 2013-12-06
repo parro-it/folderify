@@ -1,21 +1,60 @@
 # folderify
 [![Build Status](https://secure.travis-ci.org/parroit/folderify.png?branch=master)](http://travis-ci.org/parroit/folderify)  [![Npm module](https://badge.fury.io/js/folderify.png)](https://npmjs.org/package/folderify) [![Code Climate](https://codeclimate.com/github/parroit/folderify.png)](https://codeclimate.com/github/parroit/folderify)
 
-The best project ever.
+browserify call to [includeFolder][]
+
+
+This module is a plugin for [browserify](http://browserify.org) to parse the AST
+for `includeFolder()` calls so that you can inline folder contents into your
+bundles.
+
+Even though this module is intended for use with browserify, nothing about it is
+particularly specific to browserify so it should be generally useful in other
+projects.
 
 ## Getting Started
 Install the module with: `npm install folderify --save`
 
-```javascript
-var folderify = require('folderify');
-folderify.awesome(); // "awesome"
+then, for a main.js:
+
+``` js
+var includeFolder = require('include-folder'),
+    folder = includeFolder("./aFolder");
 ```
 
-## Documentation
-_(Coming soon)_
+and a [aFolder like this](https://github.com/parroit/include-folder/tree/master/test/files):
 
-## Examples
-_(Coming soon)_
+
+when you run the browserify command:
+
+```
+$ browserify -t folderify main.js > bundle.js
+```
+
+now in the bundle output file you get,
+
+``` js
+var includeFolder = undefined,
+    folder =  {
+               file3OtherFile: 'this is file3OtherContent content',
+               file1: 'this is file1 content',
+               file1_1: 'this is file1_1 content'
+           };
+```
+
+
+## or with the api
+
+``` js
+var browserify = require('browserify');
+var fs = require('fs');
+
+var b = browserify('example/main.js');
+b.transform('folderify');
+
+b.bundle().pipe(fs.createWriteStream('bundle.js'));
+```
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
@@ -25,3 +64,5 @@ Add unit tests for any new or changed functionality.
 ## License
 Copyright (c) 2013 parroit  
 Licensed under the MIT license.
+
+includeFolder: [https://github.com/parroit/include-folder]
