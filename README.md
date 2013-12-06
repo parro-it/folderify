@@ -1,7 +1,7 @@
 # folderify
 [![Build Status](https://secure.travis-ci.org/parroit/folderify.png?branch=master)](http://travis-ci.org/parroit/folderify)  [![Npm module](https://badge.fury.io/js/folderify.png)](https://npmjs.org/package/folderify) [![Code Climate](https://codeclimate.com/github/parroit/folderify.png)](https://codeclimate.com/github/parroit/folderify)
 
-browserify call to [includeFolder][]
+browserify call to [includeFolder](https://github.com/parroit/include-folder)
 
 
 This module is a plugin for [browserify](http://browserify.org) to parse the AST
@@ -65,4 +65,3 @@ Add unit tests for any new or changed functionality.
 Copyright (c) 2013 parroit  
 Licensed under the MIT license.
 
-includeFolder: [https://github.com/parroit/include-folder]
