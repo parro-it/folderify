@@ -56,6 +56,25 @@ b.bundle().pipe(fs.createWriteStream('bundle.js'));
 ```
 
 
+
+
+##How it works
+
+Folderify inline a whole directory content in browserify results.
+
+1. It uses falafel to intercepts calls to [include-folder](https://github.com/parroit/include-folder)
+2. use include-folder to generate source code of a function with a fs.readFileSync call for each file in directory
+3. feed brfs stream with generated source code
+4. replace include-folder call with brfs output
+
+
+##Use cases
+
+I use it to inline my HTML templates folder when I browserify
+ sites, but I guess it could be useful in many situations...
+
+
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality.
