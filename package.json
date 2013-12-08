@@ -32,8 +32,7 @@
     "grunt-mocha-test": "~0.7.0",
     "expect.js": "~0.2.0",
     "grunt-contrib-watch": "~0.5.3",
-    "concat": "~0.2.4",
-    "concat-stream": "~1.2.1"
+
   },
   "keywords": [],
   "dependencies": {
@@ -42,6 +41,6 @@
     "include-folder": ">0.3.0",
     "through": "~2.3.4",
     "falafel": "~0.3.1",
-    "concat": "~0.2.4"
+      "concat-stream": "~1.2.1"
   }
 }
