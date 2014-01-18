@@ -1,6 +1,6 @@
 {
   "name": "folderify",
-  "description": "The best project ever.",
+  "description": "Expose the content of each file in a folder as an object property.",
   "version": "0.5.1",
   "homepage": "https://github.com/parroit/folderify",
   "author": {
