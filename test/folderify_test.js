@@ -58,6 +58,7 @@ describe("folderify", function () {
 
         var expected =  'var iF = undefined;\n' +
             "var files = (function(){var self={},fs = require('fs');\n"+
+            'self.DS_STORE = "ciao";\n' +
             'self.file3OtherFile = "this is file3OtherContent content";\n'+
             'self.file1 = "this is file1 content";\n'+
             'self.file1_1 = "this is file1_1 content";\n'+
