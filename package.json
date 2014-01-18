@@ -37,7 +37,7 @@
   "dependencies": {
     "lodash": "~2.4.1",
     "brfs": "0.0.8",
-    "include-folder": "~0.6.0",
+    "include-folder": "~0.7.0",
     "through": "~2.3.4",
     "falafel": "~0.3.1",
     "concat-stream": "~1.2.1"
