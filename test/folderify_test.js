@@ -5,18 +5,18 @@ var expect = require("expect.js"),
     folderify = require("../lib/folderify");
 
 
-describe("folderify", function () {
-    it("is defined", function () {
+describe("folderify", function() {
+    it("is defined", function() {
         expect(folderify).to.be.an('function');
     });
 
-    it("return a through stream", function () {
+    it("return a through stream", function() {
         expect(folderify("./test/files").constructor.name).to.be.equal('Stream');
     });
 
     function checkTransform(source, expected, done) {
         var stream = folderify("./test/files");
-        var result = concat(function (data) {
+        var result = concat(function(data) {
             //console.log(data);
             //console.log(expected);
             expect(data).to.be.equal(expected);
@@ -30,7 +30,7 @@ describe("folderify", function () {
 
     this.timeout(3000);
 
-    it("un-require include-folder", function (done) {
+    it("un-require include-folder", function(done) {
         var source = 'var iF = require("include-folder");\n' +
             'console.log("anything");\n' +
             'var another = require("include-folder");\n' +
@@ -50,18 +50,34 @@ describe("folderify", function () {
         checkTransform(source, expected, done);
     });
 
-    it("replace include-folder()", function (done) {
+    it("skip hidden files", function(done) {
         var source =
             'var iF = require("include-folder");\n' +
             'var files = iF("./test/files")\n';
 
 
-        var expected =  'var iF = undefined;\n' +
-            "var files = (function(){var self={},fs = require('fs');\n"+
+        var expected = 'var iF = undefined;\n' +
+            "var files = (function(){var self={},fs = require('fs');\n" +
+            'self.file3OtherFile = "this is file3OtherContent content";\n' +
+            'self.file1 = "this is file1 content";\n' +
+            'self.file1_1 = "this is file1_1 content";\n' +
+            'return self})()\n';
+
+        checkTransform(source, expected, done);
+    });
+
+    it("include hidden files", function(done) {
+        var source =
+            'var iF = require("include-folder");\n' +
+            'var files = iF("./test/files",/(.*)/)\n';
+
+
+        var expected = 'var iF = undefined;\n' +
+            "var files = (function(){var self={},fs = require('fs');\n" +
             'self.DS_STORE = "ciao";\n' +
-            'self.file3OtherFile = "this is file3OtherContent content";\n'+
-            'self.file1 = "this is file1 content";\n'+
-            'self.file1_1 = "this is file1_1 content";\n'+
+            'self.file3OtherFile = "this is file3OtherContent content";\n' +
+            'self.file1 = "this is file1 content";\n' +
+            'self.file1_1 = "this is file1_1 content";\n' +
             'return self})()\n';
 
         checkTransform(source, expected, done);

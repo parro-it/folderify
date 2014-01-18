@@ -23,8 +23,33 @@
 			"file": "package.json",
 			"settings":
 			{
-				"buffer_size": 995,
+				"buffer_size": 1039,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/folderify_test.js",
+			"settings":
+			{
+				"buffer_size": 2247,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 2415,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test/files/.DS_STORE",
+			"settings":
+			{
+				"buffer_size": 4,
+				"line_ending": "Unix",
+				"name": "."
 			}
 		}
 	],
@@ -100,6 +125,7 @@
 	},
 	"file_history":
 	[
+		"/media/parroit/Elements/src/folderify/node_modules/include-folder/package.json",
 		"/media/parroit/Elements/src/include-folder/test/files/.DS_Store",
 		"/media/parroit/Elements/src/include-folder/lib/include-folder.js",
 		"/media/parroit/Elements/src/include-folder/package.json",
@@ -189,15 +215,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 995,
+						"buffer_size": 1039,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								109,
+								109
 							]
 						],
 						"settings":
@@ -212,6 +238,93 @@
 					},
 					"stack_index": 0,
 					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "test/folderify_test.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2247,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1960,
+								1960
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2415,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "test/files/.DS_STORE",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4,
+								4
+							]
+						],
+						"settings":
+						{
+							"auto_name": ".",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
 				}
 			]
 		}
@@ -222,7 +335,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"layout":
 	{
@@ -276,7 +389,7 @@
 		[
 			[
 				"",
-				"~/lin/sublime/home.sublime-project"
+				"~/src/Abdero/mapp.sublime-project"
 			]
 		],
 		"width": 380.0
