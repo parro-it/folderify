@@ -2,7 +2,13 @@
 
 var expect = require('expect.js'),
     concat = require('concat-stream'),
+    fs = require('fs'),
     folderify = require('../lib/folderify');
+
+var browserify = require('browserify');
+
+var expectedBundle = fs.readFileSync(__dirname +'/fixtures/expected-bundle.js','utf8'); 
+
 
 
 describe('folderify', function() {
@@ -83,5 +89,34 @@ describe('folderify', function() {
         checkTransform(source, expected, done);
     });
 
+    it('can be used programmatically', function(done){
 
+        var b = browserify(__dirname +'/fixtures/source.js');
+        b.transform(folderify);
+        b.transform('brfs');
+
+        b
+          .bundle()
+          .on('error', done)
+          .pipe(concat(function(data){
+              expect(data.toString('utf8')).to.be.equal(expectedBundle);
+              done();
+          }));
+    });
+
+    it('support transforms in both order', function(done){
+
+        var b = browserify(__dirname +'/fixtures/source.js');
+        b.transform('brfs');
+        b.transform(folderify);
+        
+
+        b
+          .bundle()
+          .on('error', done)
+          .pipe(concat(function(data){
+              expect(data.toString('utf8')).to.be.equal(expectedBundle);
+              done();
+          }));
+    });
 });
