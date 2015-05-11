@@ -1,0 +1,17 @@
+{
+    "esnext": false,
+    "indent": 4,
+    "node": true,
+    "browser": false,
+    "noyield": true,
+    "quotmark": "single",
+    "globals": {
+        "describe": true,
+        "it": true,
+        "before": true,
+        "after": true,
+        "beforeEach": true,
+        "afterEach": true,
+        "should": true
+    }
+}

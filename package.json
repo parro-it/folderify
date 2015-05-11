@@ -25,8 +25,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "_test": "jshint lib/*.js test/*.js && mocha test/*.js",
-    "test": "mocha test/*.js",
+    "test": "jshint --verbose lib/*.js test/*.js && mocha test/*.js",
     "watch": "mocha --watch test/*.js"
   },
   "devDependencies": {
