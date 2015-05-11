@@ -25,13 +25,14 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "_test": "jshint lib/*.js test/*.js && mocha test/*.js",
+    "test": "mocha test/*.js",
+    "watch": "mocha --watch test/*.js"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-mocha-test": "~0.7.0",
     "expect.js": "~0.2.0",
-    "grunt-contrib-watch": "~0.5.3"
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.4"
   },
   "keywords": [],
   "dependencies": {
