@@ -63,10 +63,10 @@ describe('folderify', function() {
 
 
         var expected = 'var iF = undefined;\n' +
-            'var files = (function(){var self={},fs = require(\'fs\');\n' +
-            'self.file3OtherFile = "this is file3OtherContent content";\n' +
-            'self.file1 = "this is file1 content";\n' +
-            'self.file1_1 = "this is file1_1 content";\n' +
+            'var files = (function(){var self={},fs = require("fs");\n' +
+            'self["file3OtherFile"] = "this is file3OtherContent content";\n' +
+            'self["file1"] = "this is file1 content";\n' +
+            'self["file1_1"] = "this is file1_1 content";\n' +
             'return self})()\n';
 
         checkTransform(source, expected, done);
@@ -79,11 +79,11 @@ describe('folderify', function() {
 
 
         var expected = 'var iF = undefined;\n' +
-            'var files = (function(){var self={},fs = require(\'fs\');\n' +
-            'self.DS_STORE = "ciao";\n' +
-            'self.file3OtherFile = "this is file3OtherContent content";\n' +
-            'self.file1 = "this is file1 content";\n' +
-            'self.file1_1 = "this is file1_1 content";\n' +
+            'var files = (function(){var self={},fs = require("fs");\n' +
+            'self["DS_STORE"] = "ciao";\n' +
+            'self["file3OtherFile"] = "this is file3OtherContent content";\n' +
+            'self["file1"] = "this is file1 content";\n' +
+            'self["file1_1"] = "this is file1_1 content";\n' +
             'return self})()\n';
 
         checkTransform(source, expected, done);
@@ -115,6 +115,8 @@ describe('folderify', function() {
           .bundle()
           .on('error', done)
           .pipe(concat(function(data){
+              //console.log(data.toString('utf8'));
+              //console.log(expectedBundle);
               expect(data.toString('utf8')).to.be.equal(expectedBundle);
               done();
           }));
