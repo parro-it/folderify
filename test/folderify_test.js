@@ -57,10 +57,10 @@ describe("folderify", function() {
 
 
         var expected = 'var iF = undefined;\n' +
-            "var files = (function(){var self={},fs = require('fs');\n" +
-            'self.file3OtherFile = "this is file3OtherContent content";\n' +
-            'self.file1 = "this is file1 content";\n' +
-            'self.file1_1 = "this is file1_1 content";\n' +
+            'var files = (function(){var self={},fs = require("fs");\n' +
+            'self["file3OtherFile"] = "this is file3OtherContent content";\n' +
+            'self["file1"] = "this is file1 content";\n' +
+            'self["file1_1"] = "this is file1_1 content";\n' +
             'return self})()\n';
 
         checkTransform(source, expected, done);
@@ -73,11 +73,27 @@ describe("folderify", function() {
 
 
         var expected = 'var iF = undefined;\n' +
-            "var files = (function(){var self={},fs = require('fs');\n" +
-            'self.DS_STORE = "ciao";\n' +
-            'self.file3OtherFile = "this is file3OtherContent content";\n' +
-            'self.file1 = "this is file1 content";\n' +
-            'self.file1_1 = "this is file1_1 content";\n' +
+            'var files = (function(){var self={},fs = require("fs");\n' +
+            'self["DS_STORE"] = "ciao";\n' +
+            'self["file3OtherFile"] = "this is file3OtherContent content";\n' +
+            'self["file1"] = "this is file1 content";\n' +
+            'self["file1_1"] = "this is file1_1 content";\n' +
+            'return self})()\n';
+
+        checkTransform(source, expected, done);
+    });
+
+    it('preserve filenames', function(done) {
+        var source =
+            'var iF = require("include-folder");\n' +
+            'var files = iF("./test/files",null,{preserveFilenames:true})\n';
+
+
+        var expected = 'var iF = undefined;\n' +
+            'var files = (function(){var self={},fs = require("fs");\n' +
+            'self["file-3-other&file.txt"] = "this is file3OtherContent content";\n' +
+            'self["file1.check"] = "this is file1 content";\n' +
+            'self["file1.txt"] = "this is file1_1 content";\n' +
             'return self})()\n';
 
         checkTransform(source, expected, done);
