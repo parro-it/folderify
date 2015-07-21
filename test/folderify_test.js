@@ -24,11 +24,11 @@ describe('folderify', function() {
     function checkTransform(source, expected, done) {
         var stream = folderify('./test/files');
         var result = concat(function(data) {
-            console.log('----------------------------');
-            console.log(data);
-            console.log('----------------------------');
-            console.log(expected);
-            console.log('----------------------------');
+            //console.log('----------------------------');
+            //console.log(data);
+            //console.log('----------------------------');
+            //console.log(expected);
+            //console.log('----------------------------');
             expect(data).to.be.equal(expected);
             done();
         });
@@ -60,7 +60,7 @@ describe('folderify', function() {
         checkTransform(source, expected, done);
     });
 
-    it.only('skip hidden files', function(done) {
+    it('skip hidden files', function(done) {
         var source =
             'var iF = require("include-folder");\n' +
             'var files = iF("./test/files")\n';
