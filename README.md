@@ -81,6 +81,6 @@ Add unit tests for any new or changed functionality.
 
 
 ## License
-Copyright (c) 2013 parroit  
+Copyright (c) 2013 parroit
 Licensed under the MIT license.
 
