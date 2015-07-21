@@ -107,7 +107,21 @@ describe('folderify', function() {
         checkTransform(source, expected, done);
     });
 
-    it('can be used programmatically', function(done){
+    it('doesn\'t require brfs', function(done){
+
+        var b = browserify(__dirname +'/fixtures/source.js');
+        b.transform(folderify);
+
+        b
+          .bundle()
+          .on('error', done)
+          .pipe(concat(function(data){
+              expect(data.toString('utf8')).to.be.equal(expectedBundle);
+              done();
+          }));
+    });
+
+    it('is compatible with brfs', function(done){
 
         var b = browserify(__dirname +'/fixtures/source.js');
         b.transform(folderify);
