@@ -1,0 +1,27 @@
+{
+  "name": "folderify-example",
+  "version": "1.0.0",
+  "description": "an example project for folderify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -t folderify > example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parro-it/folderify"
+  },
+  "author": "andrea@parro.it",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parro-it/folderify/issues"
+  },
+  "homepage": "https://github.com/parro-it/folderify",
+  "dependencies": {
+    "include-folder": "^0.9.0"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.0",
+    "folderify": "^0.6.0"
+  }
+}
