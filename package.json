@@ -1,7 +1,7 @@
 {
   "name": "folderify",
   "description": "Expose the content of each file in a folder as an object property.",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "homepage": "https://github.com/parroit/folderify",
   "author": {
     "name": "parroit",
@@ -40,6 +40,6 @@
     "concat-stream": "~1.2.1",
     "include-folder": "~0.9.0",
     "through": "~2.3.4",
-    "falafel": "~0.3.1",
+    "falafel": "~0.3.1"
   }
 }
