@@ -1,14 +1,12 @@
 'use strict';
 
-var expect = require('expect.js'),
-    concat = require('concat-stream'),
-    fs = require('fs'),
-    folderify = require('../lib/folderify');
-
+var expect = require('expect.js');
+var concat = require('concat-stream');
+var fs = require('fs');
+var folderify = require('../lib/folderify');
 var browserify = require('browserify');
 
 var expectedBundle = fs.readFileSync(__dirname + '/fixtures/expected-bundle.js', 'utf8');
-
 
 
 describe('folderify', function() {
