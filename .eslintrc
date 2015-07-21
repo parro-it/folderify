@@ -1,0 +1,12 @@
+{
+    "env": {
+        "node": true
+    },
+
+    "rules": {
+        "camelcase": [2, {"properties": "never"}],
+        "quotes": [2, "single", "avoid-escape"],
+        "no-path-concat": 0,
+        "no-eval": 0
+    }
+}

@@ -7,7 +7,7 @@ var expect = require('expect.js'),
 
 var browserify = require('browserify');
 
-var expectedBundle = fs.readFileSync(__dirname +'/fixtures/expected-bundle.js','utf8');
+var expectedBundle = fs.readFileSync(__dirname + '/fixtures/expected-bundle.js', 'utf8');
 
 
 
@@ -113,7 +113,7 @@ describe('folderify', function() {
 
     it('doesn\'t require brfs', function(done){
 
-        var b = browserify(__dirname +'/fixtures/source.js');
+        var b = browserify(__dirname + '/fixtures/source.js');
         b.transform(folderify);
 
         b
@@ -127,7 +127,7 @@ describe('folderify', function() {
 
     it('is compatible with brfs', function(done){
 
-        var b = browserify(__dirname +'/fixtures/source.js');
+        var b = browserify(__dirname + '/fixtures/source.js');
         b.transform(folderify);
         b.transform('brfs');
 
@@ -142,10 +142,9 @@ describe('folderify', function() {
 
     it('support transforms in both order', function(done){
 
-        var b = browserify(__dirname +'/fixtures/source.js');
+        var b = browserify(__dirname + '/fixtures/source.js');
         b.transform('brfs');
         b.transform(folderify);
-
 
         b
           .bundle()

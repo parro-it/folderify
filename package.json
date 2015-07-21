@@ -25,11 +25,12 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "jshint --verbose lib/*.js test/*.js && mocha test/*.js",
+    "test": "eslint lib/*.js test/*.js && mocha test/*.js",
     "watch": "mocha --watch test/*.js"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
+    "eslint": "^0.24.1",
     "expect.js": "^0.3.1",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5"
