@@ -8,8 +8,7 @@ var expect = require('expect.js'),
 var browserify = require('browserify');
 
 var expectedBundle = fs.readFileSync(__dirname +'/fixtures/expected-bundle.js','utf8');
-
-
+var expectedBundleWithJson = fs.readFileSync(__dirname +'/fixtures/expected-bundle-with-json.js','utf8');
 
 describe('folderify', function() {
     it('is defined', function() {
@@ -146,14 +145,26 @@ describe('folderify', function() {
         b.transform('brfs');
         b.transform(folderify);
 
+        b
+          .bundle()
+          .on('error', done)
+          .pipe(concat(function(data){
+              expect(data.toString('utf8')).to.be.equal(expectedBundle);
+              done();
+          }));
+    });
+
+    it('support bundles with json requires', function(done){
+
+        var b = browserify(__dirname +'/fixtures/source-with-json.js');
+        b.transform('brfs');
+        b.transform(folderify);
 
         b
           .bundle()
           .on('error', done)
           .pipe(concat(function(data){
-              //console.log(data.toString('utf8'));
-              //console.log(expectedBundle);
-              expect(data.toString('utf8')).to.be.equal(expectedBundle);
+              expect(data.toString('utf8')).to.be.equal(expectedBundleWithJson);
               done();
           }));
     });
