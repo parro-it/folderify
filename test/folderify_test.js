@@ -3,155 +3,138 @@
 var expect = require('expect.js');
 var concat = require('concat-stream');
 var fs = require('fs');
+var path = require('path');
 var folderify = require('../lib/folderify');
 var browserify = require('browserify');
 
-var expectedBundle = fs.readFileSync(__dirname + '/fixtures/expected-bundle.js', 'utf8');
+function rf(file) {
+    return fs.readFileSync(path.join(__dirname, file), 'utf8');
+}
 
+function checkTransform(sourcefile, expectedfile, done) {
+    var source = rf(sourcefile);
+    var expected = rf(expectedfile);
+    var result = concat(function(data) {
+        expect(data).to.be.equal(expected);
+        done();
+    });
+    var stream = folderify(sourcefile);
+    stream.pipe(result);
+    stream.write(source);
+    stream.end();
+}
 
 describe('folderify', function() {
+
     it('is defined', function() {
         expect(folderify).to.be.an('function');
     });
 
     it('return a through stream', function() {
-        expect(folderify('./test/files').constructor.name).to.be.equal('Stream');
+        expect(folderify().constructor.name).to.be.equal('Stream');
     });
-
-
-    function checkTransform(source, expected, done) {
-        var stream = folderify('./test/files');
-        var result = concat(function(data) {
-            //console.log('----------------------------');
-            //console.log(data);
-            //console.log('----------------------------');
-            //console.log(expected);
-            //console.log('----------------------------');
-            expect(data).to.be.equal(expected);
-            done();
-        });
-        stream.pipe(result);
-
-        stream.write(source);
-        stream.end();
-    }
 
     this.timeout(3000);
 
-    it('un-require include-folder', function(done) {
-        var source = 'var iF = require("include-folder");\n' +
-            'console.log("anything");\n' +
-            'var another = require("include-folder");\n' +
-            'console.log("anything");\n' +
-            'var ciao=iF;\n' +
-            'var b;\n' +
-            'console.log(b = another);\n' +
-            'console.log(b = require("include-folder"));\n';
-        var expected = 'var iF = undefined;\n' +
-            'console.log("anything");\n' +
-            'var another = undefined;\n' +
-            'console.log("anything");\n' +
-            'var ciao=iF;\n' +
-            'var b;\n' +
-            'console.log(b = another);\n' +
-            'console.log(b = undefined);\n';
-        checkTransform(source, expected, done);
+    it('un-requires include-folder', function(done) {
+        checkTransform(
+            'fixtures/source/unrequire-include-folder.js',
+            'fixtures/expected/unrequire-include-folder.js',
+            done
+        );
     });
 
-    it('skip hidden files', function(done) {
-        var source =
-            'var iF = require("include-folder");\n' +
-            'var files = iF("./test/files")\n';
-
-
-        var expected = 'var iF = undefined;\n' +
-            'var files = (function(){var self={},fs = require("fs");\n' +
-            'self["file3OtherFile"] = "this is file3OtherContent content";\n' +
-            'self["file1"] = "this is file1 content";\n' +
-            'self["file1_1"] = "this is file1_1 content";\n' +
-            'return self})()\n';
-
-        checkTransform(source, expected, done);
+    it('replaces includeFolder call with `files` array', function(done) {
+        checkTransform(
+            'fixtures/source/include-folder-default.js',
+            'fixtures/expected/include-folder-default.js',
+            done
+        );
     });
 
-    it('include hidden files', function(done) {
-        var source =
-            'var iF = require("include-folder");\n' +
-            'var files = iF("./test/files",/(.*)/)\n';
-
-
-        var expected = 'var iF = undefined;\n' +
-            'var files = (function(){var self={},fs = require("fs");\n' +
-            'self["DS_STORE"] = "ciao";\n' +
-            'self["file3OtherFile"] = "this is file3OtherContent content";\n' +
-            'self["file1"] = "this is file1 content";\n' +
-            'self["file1_1"] = "this is file1_1 content";\n' +
-
-            'return self})()\n';
-
-        checkTransform(source, expected, done);
+    it('respects includeFolder pattern-match arguments', function(done) {
+        checkTransform(
+            'fixtures/source/include-folder-regex.js',
+            'fixtures/expected/include-folder-regex.js',
+            done
+        );
     });
 
-    it('preserve filenames', function(done) {
-        var source =
-            'var iF = require("include-folder");\n' +
-            'var files = iF("./test/files",null,{preserveFilenames:true})\n';
-
-
-        var expected = 'var iF = undefined;\n' +
-            'var files = (function(){var self={},fs = require("fs");\n' +
-            'self["file-3-other&file.txt"] = "this is file3OtherContent content";\n' +
-            'self["file1.check"] = "this is file1 content";\n' +
-            'self["file1.txt"] = "this is file1_1 content";\n' +
-
-            'return self})()\n';
-
-        checkTransform(source, expected, done);
+    it('preserves filenames when option is set', function(done) {
+        checkTransform(
+            'fixtures/source/include-folder-filenames.js',
+            'fixtures/expected/include-folder-filenames.js',
+            done
+        );
     });
 
-    it('doesn\'t require brfs', function(done){
+    describe('as a browserify transform', function() {
+        var expectedBundle = rf('fixtures/expected/bundle.js');
+        var expectedBundleWithJson = rf('fixtures/expected/bundle-with-json.js');
 
-        var b = browserify(__dirname + '/fixtures/source.js');
-        b.transform(folderify);
+        it('doesn\'t require brfs', function(done){
 
-        b
-          .bundle()
-          .on('error', done)
-          .pipe(concat(function(data){
-              expect(data.toString('utf8')).to.be.equal(expectedBundle);
-              done();
-          }));
-    });
+            var b = browserify(path.join(__dirname, 'fixtures/source/bundle.js'));
+            b.transform(folderify);
 
-    it('is compatible with brfs', function(done){
+            b
+              .bundle()
+              .on('error', done)
+              .pipe(concat(function(data){
+                  expect(data.toString('utf8')).to.be.equal(expectedBundle);
+                  done();
+              }));
+        });
 
-        var b = browserify(__dirname + '/fixtures/source.js');
-        b.transform(folderify);
-        b.transform('brfs');
 
-        b
-          .bundle()
-          .on('error', done)
-          .pipe(concat(function(data){
-              expect(data.toString('utf8')).to.be.equal(expectedBundle);
-              done();
-          }));
-    });
+        it('supports brfs running after folderify', function(done){
 
-    it('support transforms in both order', function(done){
 
-        var b = browserify(__dirname + '/fixtures/source.js');
-        b.transform('brfs');
-        b.transform(folderify);
+            var b = browserify(path.join(__dirname, 'fixtures/source/bundle.js'));
+            b.transform(folderify);
+            b.transform('brfs');
 
-        b
-          .bundle()
-          .on('error', done)
-          .pipe(concat(function(data){
-              //console.log(data.toString('utf8'));
-              //console.log(expectedBundle);
-              expect(data.toString('utf8')).to.be.equal(expectedBundle);
-              done();
-          }));
+            b
+              .bundle()
+              .on('error', done)
+              .pipe(concat(function(data){
+                  expect(data.toString('utf8')).to.be.equal(expectedBundle);
+                  done();
+              }));
+        });
+
+
+        it('support brfs running before folderify', function(done){
+
+
+            var b = browserify(__dirname + '/fixtures/source/bundle.js');
+            b.transform('brfs');
+            b.transform(folderify);
+
+            b
+              .bundle()
+              .on('error', done)
+              .pipe(concat(function(data){
+                  expect(data.toString('utf8')).to.be.equal(expectedBundle);
+                  done();
+              }));
+        });
+
+
+        it('support bundles with non JavaScript files', function(done){
+
+            var b = browserify(__dirname + '/fixtures/source/bundle-with-json.js');
+            b.transform('brfs');
+            b.transform(folderify);
+
+            b
+              .bundle()
+              .on('error', done)
+              .pipe(concat(function(data){
+                  expect(data.toString('utf8')).to.be.equal(expectedBundleWithJson);
+                  done();
+              }));
+        });
+
     });
 });
