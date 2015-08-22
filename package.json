@@ -1,9 +1,9 @@
 {
   "name": "folderify",
   "description": "Expose the content of each file in a folder as an object property.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/parro-it/folderify",
-  "license":  "MIT",
+  "license": "MIT",
   "author": {
     "name": "Andrea Parodi",
     "email": "andrea@parro.it"
