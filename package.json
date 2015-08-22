@@ -30,7 +30,8 @@
   },
   "scripts": {
     "test": "eslint lib/*.js test/*.js && mocha test/*.js",
-    "watch": "mocha --watch test/*.js"
+    "watch": "mocha --watch test/*.js",
+    "prepublish": "npm run test"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
