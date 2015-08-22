@@ -78,11 +78,14 @@ I use it to inline my HTML templates folder when I browserify
 
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality.
 
 
 ## License
+
 Copyright (c) 2013 Andrea Parodi
+
 Licensed under the MIT license.
 
