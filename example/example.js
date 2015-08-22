@@ -3,9 +3,9 @@
 
 var includeFolder = undefined;
 
-var folder = (function(){var self={},fs = require('fs');
-self.file2 = "world";
-self.file1 = "hello";
+var folder = (function(){var self={},fs = require("fs");
+self["file2"] = "world";
+self["file1"] = "hello";
 return self})();
 
 console.log(folder.file1, folder.file2);

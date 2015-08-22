@@ -1,0 +1,7 @@
+*.sublime-*
+private
+example
+test
+.travis.yml
+.gitignore
+*.log

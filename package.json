@@ -1,23 +1,27 @@
 {
   "name": "folderify",
   "description": "Expose the content of each file in a folder as an object property.",
-  "version": "0.7.1",
-  "homepage": "https://github.com/parroit/folderify",
+  "version": "1.0.2",
+  "homepage": "https://github.com/parro-it/folderify",
+  "license": "MIT",
   "author": {
-    "name": "parroit",
-    "email": "andrea.parodi@ebansoftware.net"
+    "name": "Andrea Parodi",
+    "email": "andrea@parro.it"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-semistandard"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/parroit/folderify.git"
+    "url": "git://github.com/parro-it/folderify.git"
   },
   "bugs": {
-    "url": "https://github.com/parroit/folderify/issues"
+    "url": "https://github.com/parro-it/folderify/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/parroit/folderify/blob/master/LICENSE-MIT"
+      "url": "https://github.com/parro-it/folderify/blob/master/LICENSE-MIT"
     }
   ],
   "main": "lib/folderify",
@@ -25,21 +29,32 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "jshint --verbose lib/*.js test/*.js && mocha test/*.js",
-    "watch": "mocha --watch test/*.js"
+    "test": "eslint lib/*.js test/*.js && mocha test/*.js",
+    "watch": "mocha --watch test/*.js",
+    "prepublish": "npm run test"
   },
   "devDependencies": {
     "browserify": "^11.0.0",
+    "eslint": "^1.2.1",
+    "eslint-config-semistandard": "^5.0.0",
     "expect.js": "^0.3.1",
-    "jshint": "^2.8.0",
     "mocha": "^2.2.5"
   },
-  "keywords": [],
+  "keywords": [
+    "folder",
+    "content",
+    "file",
+    "require",
+    "readFileSync",
+    "browserify",
+    "browserify-plugin",
+    "browserify-transform"
+  ],
   "dependencies": {
     "brfs": "~1.0.2",
     "concat-stream": "^1.5.0",
     "falafel": "^1.2.0",
-    "include-folder": "^0.9.0",
+    "include-folder": "^1.0.0",
     "through": "^2.3.8"
   }
 }
