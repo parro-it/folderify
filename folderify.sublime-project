@@ -2,8 +2,10 @@
 	"folders":
 	[
 		{
-			"follow_symlinks": true,
 			"path": "."
+		},
+		{
+			"path": "/home/parro-it/Desktop/repos/include-folder"
 		}
 	]
 }

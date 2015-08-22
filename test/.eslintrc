@@ -2,5 +2,6 @@
     "env": {
         "node": true,
         "mocha": true
-    }
+    },
+    "extends": "eslint-config-semistandard"
 }
