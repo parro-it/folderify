@@ -2,7 +2,14 @@
 
 # folderify
 [![Build Status](https://img.shields.io/travis/parro-it/folderify.svg)](http://travis-ci.org/parro-it/folderify) 
-[![Npm module](https://img.shields.io/npm/dt/folderify.svg)](https://npmjs.org/package/folderify) [![Code Climate](https://img.shields.io/codeclimate/github/parro-it/folderify.svg)](https://codeclimate.com/github/parro-it/folderify)
+[![Npm module](https://img.shields.io/npm/dt/folderify.svg)](https://npmjs.org/package/folderify) 
+[![Code Climate](https://img.shields.io/codeclimate/github/parro-it/folderify.svg)](https://codeclimate.com/github/parro-it/folderify)
+[![Coverage](https://img.shields.io/codeclimate/coverage/github/parro-it/folderify.svg)](https://codeclimate.com/github/parro-it/folderify)
+[![Dependencies](https://img.shields.io/versioneye/d/parro-it/folderify.svg)](https://codeclimate.com/github/parro-it/folderify)
+
+
+
+
 
 browserify call to [includeFolder](https://github.com/parro-it/include-folder)
 
