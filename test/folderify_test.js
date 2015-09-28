@@ -126,4 +126,23 @@ describe('folderify', function () {
         }));
     });
   });
+
+  describe('Custom extensions', function () {
+    it('expose validExtensions', function () {
+      expect(folderify.validExtensions).to.be.an('array');
+    });
+
+    it('can modify validExtensions for allowing custom extensions', function (done) {
+      var origin = folderify.validExtensions;
+      folderify.validExtensions = ['.custom-js'];
+      checkTransform(
+        'fixtures/source/include-folder-default.custom-js',
+        'fixtures/expected/include-folder-default.custom-js',
+        function (err) {
+          folderify.validExtensions = origin;
+          done(err);
+        }
+      );
+    });
+  });
 });
