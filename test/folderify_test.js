@@ -25,7 +25,6 @@ function checkTransform (sourcefile, expectedfile, done) {
 }
 
 describe('folderify', function () {
-
   it('is defined', function () {
     expect(folderify).to.be.an('function');
   });
@@ -73,7 +72,6 @@ describe('folderify', function () {
     var expectedBundleWithJson = rf('fixtures/expected/bundle-with-json.js');
 
     it('doesn\'t require brfs', function (done) {
-
       var b = browserify(path.join(__dirname, 'fixtures/source/bundle.js'));
       b.transform(folderify);
 
@@ -87,7 +85,6 @@ describe('folderify', function () {
     });
 
     it('supports brfs running after folderify', function (done) {
-
       var b = browserify(path.join(__dirname, 'fixtures/source/bundle.js'));
       b.transform(folderify);
       b.transform('brfs');
@@ -102,7 +99,6 @@ describe('folderify', function () {
     });
 
     it('support brfs running before folderify', function (done) {
-
       var b = browserify(__dirname + '/fixtures/source/bundle.js');
       b.transform('brfs');
       b.transform(folderify);
@@ -117,7 +113,6 @@ describe('folderify', function () {
     });
 
     it('support bundles with non JavaScript files', function (done) {
-
       var b = browserify(__dirname + '/fixtures/source/bundle-with-json.js');
       b.transform('brfs');
       b.transform(folderify);
@@ -130,6 +125,24 @@ describe('folderify', function () {
           done();
         }));
     });
+  });
 
+  describe('Custom extensions', function () {
+    it('expose validExtensions', function () {
+      expect(folderify.validExtensions).to.be.an('array');
+    });
+
+    it('can modify validExtensions for allowing custom extensions', function (done) {
+      var origin = folderify.validExtensions;
+      folderify.validExtensions = ['.custom-js'];
+      checkTransform(
+        'fixtures/source/include-folder-default.custom-js',
+        'fixtures/expected/include-folder-default.custom-js',
+        function (err) {
+          folderify.validExtensions = origin;
+          done(err);
+        }
+      );
+    });
   });
 });

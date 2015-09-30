@@ -83,6 +83,22 @@ Folderify inline a whole directory content in browserify results.
 I use it to inline my HTML templates folder when I browserify
  sites, but I guess it could be useful in many situations...
 
+##Custom file extensions
+
+By default, supported file extensions are:
+- `.es`
+- `.es6`
+- `.js`
+- `.jsx`
+The list is exposed as a property `validExtensions` on the folderify function and can be easily extended:
+```js
+var browserify = require('browserify');
+var folderify = require('folderify');
+folderify.validExtensions.push('.custom-js');
+
+var b = browserify('example/main.js');
+b.transform(folderify);
+```
 
 
 ## Contributing
