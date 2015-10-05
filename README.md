@@ -90,6 +90,7 @@ By default, supported file extensions are:
 - `.es6`
 - `.js`
 - `.jsx`
+
 The list is exposed as a property `validExtensions` on the folderify function and can be easily extended:
 ```js
 var browserify = require('browserify');
