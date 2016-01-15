@@ -11,6 +11,7 @@
   "eslintConfig": {
     "extends": ["js", "features"]
   },
+
   "licenses": "MIT",
   "main": "lib/folderify",
   "engines": {
