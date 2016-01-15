@@ -2,31 +2,19 @@
   "name": "folderify",
   "description": "Expose the content of each file in a folder as an object property.",
   "version": "1.1.0",
-  "homepage": "https://github.com/parro-it/folderify",
+  "repository": "parro-it/folderify.git",
   "license": "MIT",
   "author": {
     "name": "Andrea Parodi",
     "email": "andrea@parro.it"
   },
   "eslintConfig": {
-    "extends": "eslint-config-semistandard"
+    "extends": ["js", "features"]
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/parro-it/folderify.git"
-  },
-  "bugs": {
-    "url": "https://github.com/parro-it/folderify/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/parro-it/folderify/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": "MIT",
   "main": "lib/folderify",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "scripts": {
     "test": "eslint lib test/folderify_test.js && node test/folderify_test.js | faucet"
@@ -34,9 +22,11 @@
   "devDependencies": {
     "browserify": "^11.0.0",
     "eslint": "^1.10.3",
-    "eslint-plugin-standard": "^1.3.1",
+    "eslint-config-features": "^1.0.1",
+    "eslint-config-js": "^2.0.2",
     "eslint-config-semistandard": "^5.0.0",
     "eslint-config-standard": "^4.4.0",
+    "eslint-plugin-standard": "^1.3.1",
     "expect.js": "^0.3.1",
     "faucet": "0.0.1",
     "tape": "^4.4.0"
