@@ -1,6 +1,5 @@
 'use strict';
 
-const expect = require('expect.js');
 const concat = require('concat-stream');
 const test = require('tape');
 const fs = require('fs');
@@ -16,7 +15,7 @@ function checkTransform(sourcefile, expectedfile, t) {
   const source = rf(sourcefile);
   const expected = rf(expectedfile);
   const result = concat(function(data) {
-    expect(data).to.be.equal(expected);
+    t.isEqual(data, expected);
     t.end();
   });
   const stream = folderify(sourcefile);
@@ -26,12 +25,12 @@ function checkTransform(sourcefile, expectedfile, t) {
 }
 
 test('folderify exports a function', function(t) {
-  expect(folderify).to.be.an('function');
+  t.isEqual(typeof folderify, 'function');
   t.end();
 });
 
 test('return a through stream', function(t) {
-  expect(folderify().constructor.name).to.be.equal('Stream');
+  t.isEqual(folderify().constructor.name, 'Stream');
   t.end();
 });
 
@@ -79,7 +78,7 @@ test('as a browserify transform', function(s) {
       .bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
-        expect(data.toString('utf8')).to.be.equal(expectedBundle);
+        t.isEqual(data.toString('utf8'), expectedBundle);
         t.end();
       }));
   });
@@ -93,7 +92,7 @@ test('as a browserify transform', function(s) {
       .bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
-        expect(data.toString('utf8')).to.be.equal(expectedBundle);
+        t.isEqual(data.toString('utf8'), expectedBundle);
         t.end();
       }));
   });
@@ -107,7 +106,7 @@ test('as a browserify transform', function(s) {
       .bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
-        expect(data.toString('utf8')).to.be.equal(expectedBundle);
+        t.isEqual(data.toString('utf8'), expectedBundle);
         t.end();
       }));
   });
@@ -121,7 +120,7 @@ test('as a browserify transform', function(s) {
       .bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
-        expect(data.toString('utf8')).to.be.equal(expectedBundleWithJson);
+        t.isEqual(data.toString('utf8'), expectedBundleWithJson);
         t.end();
       }));
   });
@@ -129,7 +128,7 @@ test('as a browserify transform', function(s) {
 
 test('Custom extensions', function(s) {
   s.test('expose validExtensions', function(t) {
-    expect(folderify.validExtensions).to.be.an('array');
+    t.isEqual(typeof folderify.validExtensions, 'array');
     t.end();
   });
 
