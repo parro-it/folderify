@@ -11,19 +11,8 @@
   "eslintConfig": {
     "extends": "eslint-config-semistandard"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/parro-it/folderify.git"
-  },
-  "bugs": {
-    "url": "https://github.com/parro-it/folderify/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/parro-it/folderify/blob/master/LICENSE-MIT"
-    }
-  ],
+  "repository": "parro-it/folderify.git",
+  "licenses": "MIT",
   "main": "lib/folderify",
   "engines": {
     "node": ">= 0.10.0"
