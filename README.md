@@ -16,7 +16,7 @@ Even though this module is intended for use with browserify, nothing about it is
 # Install
 
 ```bash
-npm install folderify --save`
+npm install folderify --save
 ```
 
 # Usage
