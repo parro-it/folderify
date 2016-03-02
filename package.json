@@ -41,7 +41,7 @@
     "browserify-transform"
   ],
   "dependencies": {
-    "brfs": "^1.4.3",
+    "brfs": "~1.0.2",
     "concat-stream": "^1.5.0",
     "falafel": "^1.2.0",
     "include-folder": "^1.0.0",
