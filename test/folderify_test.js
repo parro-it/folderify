@@ -15,7 +15,7 @@ function checkTransform(sourcefile, expectedfile, t) {
   const source = rf(sourcefile);
   const expected = rf(expectedfile);
   const result = concat(function(data) {
-    t.isEqual(data, expected);
+    t.equal(data, expected);
     t.end();
   });
   const stream = folderify(sourcefile);
@@ -74,8 +74,7 @@ test('as a browserify transform', function(s) {
     const b = browserify(path.join(__dirname, 'fixtures/source/bundle.js'));
     b.transform(folderify);
 
-    b
-      .bundle()
+    b.bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
         t.isEqual(data.toString('utf8'), expectedBundle);
@@ -88,8 +87,7 @@ test('as a browserify transform', function(s) {
     b.transform(folderify);
     b.transform('brfs');
 
-    b
-      .bundle()
+    b.bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
         t.isEqual(data.toString('utf8'), expectedBundle);
@@ -102,8 +100,7 @@ test('as a browserify transform', function(s) {
     b.transform('brfs');
     b.transform(folderify);
 
-    b
-      .bundle()
+    b.bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
         t.isEqual(data.toString('utf8'), expectedBundle);
@@ -116,8 +113,7 @@ test('as a browserify transform', function(s) {
     b.transform('brfs');
     b.transform(folderify);
 
-    b
-      .bundle()
+    b.bundle()
       .on('error', t.end.bind(t))
       .pipe(concat(function(data) {
         t.isEqual(data.toString('utf8'), expectedBundleWithJson);
@@ -128,7 +124,7 @@ test('as a browserify transform', function(s) {
 
 test('Custom extensions', function(s) {
   s.test('expose validExtensions', function(t) {
-    t.isEqual(typeof folderify.validExtensions, 'array');
+    t.ok(Array.isArray(folderify.validExtensions));
     t.end();
   });
 
@@ -138,12 +134,12 @@ test('Custom extensions', function(s) {
     checkTransform(
       'fixtures/source/include-folder-default.custom-js',
       'fixtures/expected/include-folder-default.custom-js',
-      {
+      Object.assign({}, t, {
         end: function(err) {
           folderify.validExtensions = origin;
           t.end(err);
         }
-      }
+      })
     );
   });
 });
